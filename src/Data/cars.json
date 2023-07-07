@@ -1,0 +1,71 @@
+[
+    {
+        "id": "c12895",
+        "Name": "Clio V6 phase 1",
+        "Annee": 2000,
+        "kilometrage": "20000KM",
+        "transmission": "manuelle",
+        "couleur": "Gris argent",
+        "moteur": "3.0 V6",
+        "carburant": "Essence",
+        "VIN": "VF1C61A0624346091",
+        "adresse": "Mila 43000",
+        "city": "Mila",
+        "vendeur": {
+            "": {}
+        },
+        "faits_importants": [
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor"
+        ],
+        "EQUIPEMENT_ET_CARACTERISTIQUES": [
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor"
+        ],
+        "CONDITION": [
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor"
+        ],
+        "HISTORIQUE_D'ENTRETIEN": [
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor"
+        ],
+        "RÉSUME": "\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\"",
+        "EXTERIEURE": [
+            "https://l8.nu/shWA",
+            "https://l8.nu/qYIy",
+            "https://l8.nu/shWJ"
+        ],
+        "INTERIEURE": [
+            "https://l8.nu/shWM",
+            "https://l8.nu/shWM",
+            "https://l8.nu/shWM",
+            "https://l8.nu/shWM"
+        ],
+        "MECANIQUE": [
+            "https://l8.nu/qYJg",
+            "https://l8.nu/qYJg",
+            "https://l8.nu/qYJg"
+        ],
+        "DOCUMENTS": [
+            "https://l8.nu/shWT",
+            "https://l8.nu/shWT",
+            "https://l8.nu/shWT",
+            "https://l8.nu/shWT"
+        ],
+        "lenchere": [
+            {
+                "valeur": "10000000",
+                "par": "hamid27"
+            },
+            {
+                "valeur": "12000000",
+                "par": "amine31"
+            }
+        ]
+    }
+]
