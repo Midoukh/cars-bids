@@ -45,10 +45,10 @@ export const CarsList: React.FC<CarsListProps> = ({}) => {
           address={car.adresse}
           fuel={car.carburant}
           city={car.city}
+          
         />
       ))}
     </Grid>
   );
 };
 
-console.log("done");
