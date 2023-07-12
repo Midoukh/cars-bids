@@ -13,6 +13,7 @@ import bidIcon from "../assets/Icons/law.png";
 
 import { NavBar } from "../compononents/NavBar";
 import { formatMoney } from "../utils/formatMoney";
+import { CarOverview } from "../compononents/CarOverview";
 
 type CarPageType = object;
 type carImgGall = {
@@ -51,9 +52,6 @@ export const CarPage: React.FC<CarPageType> = () => {
     setCarId(carId);
     getCar();
     getAndMakeImagesForRIG();
-    console.log("In useEffect");
-    console.log(data);
-    console.log(car);
   }, [car, carId, currentBid, bids, carName]);
 
   const getCar = (): void => {
@@ -155,9 +153,19 @@ export const CarPage: React.FC<CarPageType> = () => {
       </Flex>
       <Flex mt={30} p={10}>
         <Box>
-          <Text as="h1" size="4xl" fontWeight={"bold"}>{carName}</Text>
+          <Text as="h1" size="4xl" fontWeight={"bold"}>
+            {carName}
+          </Text>
         </Box>
       </Flex>
+      <CarOverview
+        miles={car.kilometrage}
+        transmition={car.transmission}
+        color={car.couleur}
+        VIN={car.VIN}
+        engine={car.moteur}
+        address={car.adresse}
+      />
     </Box>
   );
 };
