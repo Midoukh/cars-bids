@@ -3,7 +3,7 @@ import ImageGallery from "react-image-gallery";
 import { Link } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import { Button, ButtonGroup, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Text, AspectRatio } from "@chakra-ui/react";
 import data from "../Data/cars.json";
 import { CarType } from "../Types";
 import backIcon from "../assets/Icons/left.png";
@@ -14,6 +14,11 @@ import bidIcon from "../assets/Icons/law.png";
 import { NavBar } from "../compononents/NavBar";
 import { formatMoney } from "../utils/formatMoney";
 import { CarOverview } from "../compononents/CarOverview";
+import { CustomList } from "../compononents/CarOverview/customList";
+import { ImagesSlider } from "../compononents/ImagesSlider";
+import { CountDown } from "../compononents/CountDown";
+import "./style.css";
+import { calTimeDiffInSec } from "../utils/calculateTimeDiff";
 
 type CarPageType = object;
 type carImgGall = {
@@ -54,6 +59,16 @@ export const CarPage: React.FC<CarPageType> = () => {
     getAndMakeImagesForRIG();
   }, [car, carId, currentBid, bids, carName]);
 
+  useEffect(() => {
+    // Add sticky behavior to the navbar
+    const navbar: HTMLElement | null = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => handleScroll(navbar));
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll(navbar));
+    };
+  }, []);
+
   const getCar = (): void => {
     console.log("Carid in geCar(): " + carId);
     for (let i = 0; i < data.length; i++) {
@@ -79,11 +94,30 @@ export const CarPage: React.FC<CarPageType> = () => {
     }
   };
 
+  //sticky navbar
+
+  const handleScroll = (navbar: HTMLElement | null) => {
+    if (navbar) {
+      if (window.scrollY > 900) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  };
+
   return (
     <Box minWidth="100vw" p={0} m={0}>
       <NavBar />
       <ImageGallery items={images} />
-      <Flex justify={"space-evenly"} mt={"45px"} paddingInline={0}>
+      <Flex
+        bg={"cyan.50"}
+        justify={"space-evenly"}
+        paddingInline={0}
+        id="navbar"
+        paddingBlock={"3rem"}
+        zIndex={"1"}
+      >
         <Link to="/">
           <Box _hover={{ cursor: "pointer" }}>
             <Image
@@ -102,14 +136,7 @@ export const CarPage: React.FC<CarPageType> = () => {
             Enchére actuelle
           </Text>
         </Box>
-        <Box>
-          <Text as={"h2"} fontWeight={"bold"} fontSize={"lg"}>
-            05:30:36
-          </Text>
-          <Text as={"h3"} opacity={".7"} fontSize={"sm"}>
-            Aujourd'hui à 6:30pm
-          </Text>
-        </Box>
+        <CountDown diff={calTimeDiffInSec(car.end_of_bid)} endsIn={car.end_of_bid} />
         <Box>
           <Text as={"h2"} fontWeight={"bold"} fontSize={"lg"}>
             {bids}
@@ -166,6 +193,49 @@ export const CarPage: React.FC<CarPageType> = () => {
         engine={car.moteur}
         address={car.adresse}
       />
+      <CustomList title="Faits Marquants" listArr={car.faits_importants} />
+      <CustomList
+        title="ÉQUIPEMENT ET CARACTÉRISTIQUES"
+        listArr={car.EQUIPEMENT_ET_CARACTERISTIQUES}
+      />
+      <CustomList title="Condition" listArr={car.CONDITION} />
+      <CustomList
+        title="HISTORIQUE D'ENTRETIEN"
+        listArr={car.HISTORIQUE_DENTRETIEN}
+      />
+      <Box p={10}>
+        <Text as="b" fontSize={"25px"} mb={2}>
+          Résume
+        </Text>
+        <Text noOfLines={[1, 2, 3]}>{car.RESUME}</Text>
+      </Box>
+
+      {car.Video_URL_ID && (
+        <Box
+          p={50}
+          w="100vw"
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <AspectRatio
+            w={"80%"}
+            ratio={1}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <iframe
+              src={`https://www.youtube.com/embed/${car.Video_URL_ID}`}
+              title={car.Name}
+              allowFullScreen
+            />
+          </AspectRatio>
+        </Box>
+      )}
+      <ImagesSlider title="Extérieure" imgsList={car.EXTERIEURE} />
+      <ImagesSlider title="Intérieure" imgsList={car.INTERIEURE} />
+      <ImagesSlider title="Méchanique" imgsList={car.MECANIQUE} />
     </Box>
   );
 };

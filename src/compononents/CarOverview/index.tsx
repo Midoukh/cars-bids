@@ -10,7 +10,6 @@ import lotIcon from "../../assets/Icons/hammer.png";
 import userIcon from "../../assets/Icons/user.png";
 import algeriaIcon from "../../assets/Icons/algeria.png";
 
-
 type CarOverviewType = {
   miles: number;
   transmition: string;
@@ -18,6 +17,7 @@ type CarOverviewType = {
   engine: string;
   VIN: string;
   address: string;
+
 };
 
 type cusImgType = {
@@ -37,7 +37,7 @@ export const CarOverview: React.FC<CarOverviewType> = ({
   color,
   engine,
   VIN,
-  address
+  address,
 }) => {
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={6} p={20}>
