@@ -19,6 +19,8 @@ import { ImagesSlider } from "../compononents/ImagesSlider";
 import { CountDown } from "../compononents/CountDown";
 import "./style.css";
 import { calTimeDiffInSec } from "../utils/calculateTimeDiff";
+import { getDayOfTheWeek } from "../utils/getDayOfTheWeek";
+import { getCurrentTime } from "../utils/getCurrentTime";
 
 type CarPageType = object;
 type carImgGall = {
@@ -70,7 +72,6 @@ export const CarPage: React.FC<CarPageType> = () => {
   }, []);
 
   const getCar = (): void => {
-    console.log("Carid in geCar(): " + carId);
     for (let i = 0; i < data.length; i++) {
       if (data[i].id === carId) setCar(data[i]);
     }
@@ -136,7 +137,13 @@ export const CarPage: React.FC<CarPageType> = () => {
             Enchére actuelle
           </Text>
         </Box>
-        <CountDown diff={calTimeDiffInSec(car.end_of_bid)} endsIn={car.end_of_bid} />
+        {car.end_of_bid && (
+          <CountDown
+            diff={calTimeDiffInSec(car.end_of_bid)}
+            day={getDayOfTheWeek(new Date(car.end_of_bid))}
+            time={getCurrentTime(new Date(car.end_of_bid))}
+          />
+        )}
         <Box>
           <Text as={"h2"} fontWeight={"bold"} fontSize={"lg"}>
             {bids}

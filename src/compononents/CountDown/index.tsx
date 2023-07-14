@@ -3,17 +3,20 @@ import React, { useEffect, useState } from "react";
 
 type CountDownType = {
   diff: number;
-  endsIn: string;
+  day: string;
+  time: string;
 };
-export const CountDown: React.FC<CountDownType> = ({ diff, endsIn }) => {
-    console.log("diff: " + diff + " " + typeof(diff))
+export const CountDown: React.FC<CountDownType> = ({ diff, day, time }) => {
   const [remainingTime, setRemainingTime] = useState<number>(diff);
-   
+
+  const calculateDays = (seconds: number): number => {
+    return Math.floor(seconds / (24 * 60 * 60));
+  };
+
   // Update the remaining time every second
   useEffect(() => {
     const interval = setInterval(() => {
       setRemainingTime((prevTime) => {
-
         if (prevTime <= 0) {
           clearInterval(interval);
           return 0;
@@ -22,8 +25,6 @@ export const CountDown: React.FC<CountDownType> = ({ diff, endsIn }) => {
         }
       });
     }, 1000);
-
-    
   }, []);
   //console.log(remainingTime +  ' ' + (remainingTime > 0? true:false))
   // Calculate the hours, minutes, and seconds from the remaining time
@@ -38,8 +39,16 @@ export const CountDown: React.FC<CountDownType> = ({ diff, endsIn }) => {
 
   return (
     <Box>
-      <Text>{formattedTime}</Text>
-      <Text>{endsIn}</Text>
+      {hours >= 24 ? (
+        <Text fontSizeize={"12px"} fontWeight={"bold"}>
+          {calculateDays(diff) > 1
+            ? calculateDays(diff) + " jours"
+            : calculateDays(diff) + " jour"}
+        </Text>
+      ) : (
+        <Text>{formattedTime}</Text>
+      )}
+      <Text opacity={".7"}>{`${day} ${time}`}</Text>
     </Box>
   );
 };
