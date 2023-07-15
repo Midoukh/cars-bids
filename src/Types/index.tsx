@@ -11,3 +11,9 @@ export type CarType = {
   fuel: string;
   city:string;
 };
+
+export type BidType = {
+  valeur: string;
+  par: string;
+  date: Date;
+}

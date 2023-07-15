@@ -17,6 +17,7 @@
         "start_of_bid": "Thu Jul 8 2023 15:21:50 GMT+0100 (Central European Standard Time)",
         "end_of_bid": "Thu Jul 15 2023 15:21:50 GMT+0100 (Central European Standard Time)",
         "Video_URL_ID": "Z2XKLuwpbgE",
+        "sold": false,
         "faits_importants": [
             "Neque porro quisquam est qui dolorem ipsum quia dolor",
             "Neque porro quisquam est qui dolorem ipsum quia dolor",
@@ -69,11 +70,13 @@
         "lenchere": [
             {
                 "valeur": "10000000",
-                "par": "hamid27"
+                "par": "hamid27",
+                "date": "Thu Jul 8 2023 18:21:50 GMT+0100 (Central European Standard Time)"
             },
             {
                 "valeur": "12000000",
-                "par": "amine31"
+                "par": "amine31",
+                "date": "Thu Jul 12 2023 12:21:50 GMT+0100 (Central European Standard Time)"
             }
         ]
     }

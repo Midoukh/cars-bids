@@ -5,8 +5,16 @@ type CountDownType = {
   diff: number;
   day: string;
   time: string;
+  ended: boolean;
+  sold: boolean;
 };
-export const CountDown: React.FC<CountDownType> = ({ diff, day, time }) => {
+export const CountDown: React.FC<CountDownType> = ({
+  diff,
+  day,
+  time,
+  ended,
+  sold,
+}) => {
   const [remainingTime, setRemainingTime] = useState<number>(diff);
 
   const calculateDays = (seconds: number): number => {
@@ -26,7 +34,7 @@ export const CountDown: React.FC<CountDownType> = ({ diff, day, time }) => {
       });
     }, 1000);
   }, []);
-  //console.log(remainingTime +  ' ' + (remainingTime > 0? true:false))
+
   // Calculate the hours, minutes, and seconds from the remaining time
   const hours = Math.floor(remainingTime / 3600);
   const minutes = Math.floor((remainingTime % 3600) / 60);
@@ -37,18 +45,23 @@ export const CountDown: React.FC<CountDownType> = ({ diff, day, time }) => {
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
+  const isSoldMsg = sold ? "Vendue" : "Invendue";
   return (
     <Box>
       {hours >= 24 ? (
-        <Text fontSizeize={"12px"} fontWeight={"bold"}>
-          {calculateDays(diff) > 1
+        <Text fontSize={"20px"} fontWeight={"bold"}>
+          {ended
+            ? "Terminée"
+            : calculateDays(diff) > 1
             ? calculateDays(diff) + " jours"
             : calculateDays(diff) + " jour"}
         </Text>
       ) : (
-        <Text>{formattedTime}</Text>
+        <Text fontSize={"20px"} fontWeight={"bold"}>
+          {formattedTime}
+        </Text>
       )}
-      <Text opacity={".7"}>{`${day} ${time}`}</Text>
+      <Text opacity={".7"}>{ended ? isSoldMsg : `${day} ${time}`}</Text>
     </Box>
   );
 };

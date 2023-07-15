@@ -49,6 +49,7 @@ export const CarPage: React.FC<CarPageType> = () => {
   const [carImagesGall, setCarImagesGallery] = useState<carImgGall[]>([]);
   const [currentBid, setCurrentBid] = useState<string>("");
   const [bids, setBids] = useState<number>(0);
+  const [isAuctionEnded, setIsAuctionEnded] = useState<boolean>(false);
 
   useEffect(() => {
     const currentUrl = window.location.pathname;
@@ -59,7 +60,9 @@ export const CarPage: React.FC<CarPageType> = () => {
     setCarId(carId);
     getCar();
     getAndMakeImagesForRIG();
-  }, [car, carId, currentBid, bids, carName]);
+    const timeDiff = calTimeDiffInSec(car.end_of_bid);
+    if (timeDiff <= 0) setIsAuctionEnded(true);
+  }, [car, carId, currentBid, bids, carName, isAuctionEnded]);
 
   useEffect(() => {
     // Add sticky behavior to the navbar
@@ -131,10 +134,14 @@ export const CarPage: React.FC<CarPageType> = () => {
         </Link>
         <Box>
           <Text as={"h2"} fontWeight={"bold"} fontSize={"lg"}>
-            {currentBid !== "" ? currentBid + "DA" : "..."}
+            {currentBid !== ""
+              ? !isAuctionEnded
+                ? currentBid + "DA"
+                : "-DA"
+              : "..."}
           </Text>
           <Text as={"h4"} opacity={".7"} fontSize={"sm"}>
-            Enchére actuelle
+            {!isAuctionEnded? "Enchére actuelle" : "Terminée"}
           </Text>
         </Box>
         {car.end_of_bid && (
@@ -142,6 +149,8 @@ export const CarPage: React.FC<CarPageType> = () => {
             diff={calTimeDiffInSec(car.end_of_bid)}
             day={getDayOfTheWeek(new Date(car.end_of_bid))}
             time={getCurrentTime(new Date(car.end_of_bid))}
+            ended={isAuctionEnded}
+            sold={car.sold}
           />
         )}
         <Box>
